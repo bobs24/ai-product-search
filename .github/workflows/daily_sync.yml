@@ -1,0 +1,33 @@
+name: Daily Product Sync
+
+on:
+  schedule:
+    # 19:00 UTC = 02:00 WIB (Surabaya Time)
+    - cron: '0 19 * * *'
+  workflow_dispatch: # Allows you to click a "Run Now" button manually
+
+jobs:
+  run-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install Libraries
+        run: pip install -r requirements.txt
+
+      - name: Run Ingestion Script
+        env:
+          # Mapping GitHub Secrets to Environment Variables
+          QDRANT_URL: ${{ secrets.QDRANT_URL }}
+          QDRANT_API_KEY: ${{ secrets.QDRANT_API_KEY }}
+          METABASE_URL: ${{ secrets.METABASE_URL }}
+          METABASE_USERNAME: ${{ secrets.METABASE_USERNAME }}
+          METABASE_PASSWORD: ${{ secrets.METABASE_PASSWORD }}
+          METABASE_QUESTION_ID: ${{ secrets.METABASE_QUESTION_ID }}
+        run: python src/ingest_data.py

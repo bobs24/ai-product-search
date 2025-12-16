@@ -1,0 +1,5 @@
+.streamlit/
+__pycache__/
+*.pyc
+*.npy
+*.pkl

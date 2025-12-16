@@ -1,0 +1,9 @@
+streamlit
+qdrant-client
+torch
+torchvision
+pillow
+requests
+pandas
+numpy
+tqdm
