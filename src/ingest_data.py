@@ -8,7 +8,7 @@ from io import BytesIO
 from qdrant_client import QdrantClient
 from qdrant_client.http import models
 from torchvision import transforms
-from tqdm.notebook import tqdm
+from tqdm import tqdm
 import uuid
 import os
 
