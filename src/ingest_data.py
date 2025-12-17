@@ -1,3 +1,4 @@
+import streamlit as st
 import requests
 import pandas as pd
 import torch
@@ -9,6 +10,14 @@ from qdrant_client.http import models
 from torchvision import transforms
 from tqdm.notebook import tqdm
 import uuid
+
+def get_secret(key_group, key_name, env_name):
+    try:
+        # Try Streamlit Secrets first
+        return st.secrets[key_group][key_name]
+    except (FileNotFoundError, KeyError, AttributeError):
+        # Fallback to Environment Variables
+        return os.getenv(env_name)
 
 # --- CONFIGURATION ---
 QDRANT_URL = get_secret("qdrant", "url", "QDRANT_URL")
