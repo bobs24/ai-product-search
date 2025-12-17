@@ -74,7 +74,7 @@ def process_fast(df, collection_name="voila_products"):
 
     print("Processing images...")
 
-    batch_size = 100
+    batch_size = 300
     total_skipped = 0
 
     # Process in Batches
