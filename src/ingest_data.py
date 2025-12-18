@@ -10,6 +10,7 @@ from qdrant_client.http import models
 from torchvision import transforms
 from tqdm.notebook import tqdm
 import uuid
+import os
 
 def get_secret(key_group, key_name, env_name):
     try:

@@ -95,7 +95,7 @@ with st.sidebar:
 st.title("🛍️ Voila.id Visual Search")
 st.markdown("##### Upload a product image to find similar items")
 
-uploaded_file = st.file_uploader("Upload", type=["jpg", "png"], label_visibility="collapsed")
+uploaded_file = st.file_uploader("Upload", type=["jpg", "png", "webp"], label_visibility="collapsed")
 
 if uploaded_file:
     col_l, col_r = st.columns([1, 3])
