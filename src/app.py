@@ -6,6 +6,7 @@ import warnings
 import numpy as np
 import importlib.metadata
 from qdrant_client import QdrantClient, models
+import io
 
 # ------------------------------------------------------------------
 # 1. BASIC SETUP
@@ -83,6 +84,17 @@ def get_embedding(image: Image.Image) -> list:
         embedding = embedding / norm
     return embedding.tolist()
 
+def load_image(uploaded_file):
+            try:
+                img = Image.open(uploaded_file)
+            except Exception:
+                # fallback: read bytes directly (handles WebP in some environments)
+                uploaded_file.seek(0)
+                img = Image.open(io.BytesIO(uploaded_file.read()))
+            if img.mode != "RGB":
+                img = img.convert("RGB")
+            return img
+
 # ------------------------------------------------------------------
 # 5. UI
 # ------------------------------------------------------------------
@@ -101,7 +113,7 @@ if uploaded_file:
     col_l, col_r = st.columns([1, 3])
     
     with col_l:
-        query_image = Image.open(uploaded_file).convert("RGB")
+        query_image = load_image(uploaded_file)
         st.image(query_image, use_container_width=True, caption="Query Image")
         
     with col_r:
