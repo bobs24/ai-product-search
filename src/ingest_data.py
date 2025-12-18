@@ -8,7 +8,7 @@ from io import BytesIO
 from qdrant_client import QdrantClient
 from qdrant_client.http import models
 from torchvision import transforms
-from tqdm.notebook import tqdm
+from tqdm import tqdm
 import uuid
 import os
 
@@ -74,7 +74,7 @@ def process_fast(df, collection_name="voila_products"):
 
     print("Processing images...")
 
-    batch_size = 100
+    batch_size = 300
     total_skipped = 0
 
     # Process in Batches
