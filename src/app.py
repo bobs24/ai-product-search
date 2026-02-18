@@ -8,6 +8,7 @@ import importlib.metadata
 from qdrant_client import QdrantClient, models
 import io
 
+
 # ------------------------------------------------------------------
 # 1. BASIC SETUP
 # ------------------------------------------------------------------
